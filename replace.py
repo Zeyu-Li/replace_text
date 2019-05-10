@@ -31,27 +31,36 @@ names this time last year?’
 old.’"""
 
     # opens json dictionary
-    with open('replace.json', 'r') as fp:
-        dictionary = json.load(fp)
+    try:
+        with open('replace.json', 'r') as fp:
+            dictionary = json.load(fp)
 
-    index = 0
-    # for words in the text, split by line break or space
-    for word in string.replace("\n", " ").split(" "):
+        index = 0
+        # for words in the text, split by line break or space
+        for word in string.replace("\n", " ").split(" "):
 
-        # if it is in the dictionary, change the word
-        # to the one in the dictionary
-        if word.lower() in dictionary:
-            if word not in dictionary and word != "I":
-                word = dictionary[word.lower()].title()
-            else:
-                word = dictionary[word.lower()]
+            # if it is in the dictionary, change the word
+            # to the one in the dictionary
+            if word.lower() in dictionary:
+                if word not in dictionary and word != "I":
+                    word = dictionary[word.lower()].title()
+                else:
+                    word = dictionary[word.lower()]
 
-        print(word, end=' ')
-        index += 1
+            print(word, end=' ')
+            index += 1
 
-        # new line break every 9 words
-        if index % 10 == 9:
-            print("")
+            # new line break every 9 words
+            if index % 10 == 9:
+                print("")
+
+    except:
+        fail = True
+
+    if not fail:
+        print("The translation was successful")
+    else:
+        print("Failed to translation because json was not given")
 
     return 0
 
