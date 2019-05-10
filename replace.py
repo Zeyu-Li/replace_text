@@ -13,6 +13,7 @@ This program replaces words in a string object with words in a dictionary
 import json
 
 
+# string that is going to be replaced
 string = """Once upon a time a Wolf was lapping at a spring on a hillside,
 when, looking up, what should he see but a Lamb just
 beginning to drink a little lower down. ‘There’s my supper,’
