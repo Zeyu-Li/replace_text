@@ -11,29 +11,22 @@ This program replaces words in a string object with words in a dictionary
 
 # import modules
 import json
+import re
 
 
 # string that is going to be replaced
-string = """Once upon a time a Wolf was lapping at a spring on a hillside,
-when, looking up, what should he see but a Lamb just
-beginning to drink a little lower down. ‘There’s my supper,’
-thought he, ‘if only I can find some excuse to seize it.’ Then
-he called out to the Lamb, ‘How dare you muddle the water
-from which I am drinking?’
-‘Nay, master, nay,’ said Lambikin; ‘if the water be muddy
-up there, I cannot be the cause of it, for it runs down from
-you to me.’
-‘Well, then,’ said the Wolf, ‘why did you call me bad
-names this time last year?’
-‘That cannot be,’ said the Lamb; ‘I am only six months
-old.’"""
 
+def replace(string, dictionary):
 
-def replace(dictionary):
+    paragraph = string
 
-    index = 0
+    paragraph = re.split("(\,)|(\n)|(\')|(\")|(\.)", paragraph)
+
+    print(paragraph)
+    return 0
+
     # for words in the text, split by line break or space
-    for word in string.replace("\n", " ").split(" "):
+    for word in paragraph:
 
         # if it is in the dictionary, change the word
         # to the one in the dictionary
@@ -44,24 +37,25 @@ def replace(dictionary):
                 word = dictionary[word.lower()]
 
         print(word, end=' ')
-        index += 1
 
         # new line break every 9 words
-        if index % 10 == 9:
-            print("")
 
 
 def main():
     """ Takes string and replaces it with values in dictionary """
 
     # opens json dictionary
-    assert "fail"
+    try:
+        with open('old_text.txt', 'r') as fp:
+            string = fp.read()
+    except FileNotFoundError:
+        print("The text that is to be modified does not exist")
     try:
         with open('replace.json', 'r') as fp:
             dictionary = json.load(fp)
-        replace(dictionary)
+        replace(string, dictionary)
         print("The translation was successful")
-    except:
+    except FileNotFoundError:
         print("Failed to translation because json was not given")
 
     return 0
