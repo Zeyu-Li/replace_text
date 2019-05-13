@@ -18,15 +18,17 @@ import re
 
 def replace(string, dictionary):
 
-    paragraph = string
-
-    paragraph = re.split("(\,)|(\n)|(\')|(\")|(\.)", paragraph)
-
-    print(paragraph)
-    return 0
+    paragraph = re.split(" |\n", string)
+    new_paragraph = []
+    special = []
 
     # for words in the text, split by line break or space
-    for word in paragraph:
+    for word_count, word in enumerate(paragraph):
+
+        for character_count, character in enumerate(word):
+            if character in ("\'", "\"", "\n", ".", ','):
+                if character_count != 0:
+                    special.append(("end", word_count, character))
 
         # if it is in the dictionary, change the word
         # to the one in the dictionary
