@@ -59,15 +59,13 @@ def main():
     # finds and opens json dictionary
     try:
         if flag:
-            raise MyException("MissingOldText")
+            return 0
         with open('replace.json', 'r') as fp:
             dictionary = json.load(fp)
         replace(string, dictionary)
         print("The translation was successful")
     except FileNotFoundError:
         print("Failed to translation because json was not given")
-    except MyException:
-        pass
 
     return 0
 
